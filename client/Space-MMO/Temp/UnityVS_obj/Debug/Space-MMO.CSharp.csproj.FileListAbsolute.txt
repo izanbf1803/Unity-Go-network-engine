@@ -1,0 +1,13 @@
+F:\Desktop\Space-MMO\client\Space-MMO\Temp\UnityVS_bin\Debug\Assembly-CSharp.dll
+F:\Desktop\Space-MMO\client\Space-MMO\Temp\UnityVS_bin\Debug\Assembly-CSharp.pdb
+F:\Desktop\Space-MMO\client\Space-MMO\Temp\UnityVS_bin\Debug\UnityEditor.dll
+F:\Desktop\Space-MMO\client\Space-MMO\Temp\UnityVS_bin\Debug\UnityEngine.dll
+F:\Desktop\Space-MMO\client\Space-MMO\Temp\UnityVS_bin\Debug\UnityEngine.Networking.dll
+F:\Desktop\Space-MMO\client\Space-MMO\Temp\UnityVS_bin\Debug\UnityEngine.UI.dll
+F:\Desktop\Space-MMO\client\Space-MMO\Temp\UnityVS_bin\Debug\UnityEngine.xml
+F:\Desktop\Space-MMO\client\Space-MMO\Temp\UnityVS_bin\Debug\UnityEngine.UI.xml
+F:\Desktop\Space-MMO\client\Space-MMO\Temp\UnityVS_bin\Debug\UnityEngine.Networking.xml
+F:\Desktop\Space-MMO\client\Space-MMO\Temp\UnityVS_bin\Debug\UnityEditor.xml
+F:\Desktop\Space-MMO\client\Space-MMO\Temp\UnityVS_obj\Debug\Space-MMO.CSharp.csprojResolveAssemblyReference.cache
+F:\Desktop\Space-MMO\client\Space-MMO\Temp\UnityVS_obj\Debug\Assembly-CSharp.dll
+F:\Desktop\Space-MMO\client\Space-MMO\Temp\UnityVS_obj\Debug\Assembly-CSharp.pdb
