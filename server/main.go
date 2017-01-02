@@ -6,6 +6,7 @@ import (
 	"net"
 	"os"
 	"strconv"
+	"sync"
 	"time"
 
 	"./client"
@@ -18,11 +19,13 @@ const (
 )
 
 const ( // SOCKET_TAG
-	NOP    = 0
-	SET_ID = 1
+	NOP      = 0
+	SET_ID   = 1
+	SEND_KEY = 2
 )
 
 var id int
+var mutex sync.Mutex
 
 func main() {
 	id = 0
@@ -60,10 +63,23 @@ func handleRequest(c *client.Client) {
 	defer c.Close()
 	go clientInput(c)
 
+	c.Send(SET_ID, []byte(c.ID))
+
 	for {
 		//fmt.Println("SENT:", msg.Tag, msg.Data)
-		time.Sleep(time.Duration(1000) * time.Millisecond)
-		fmt.Println(c.Queue.Len)
+		time.Sleep(time.Duration(50) * time.Millisecond)
+
+		for c.Queue.Len > 0 {
+			mutex.Lock()
+			msg := c.Queue.Pop()
+			mutex.Unlock()
+
+			switch msg.Tag {
+			case SEND_KEY:
+				fmt.Println("KEY ->", msg.Data)
+				break
+			}
+		}
 	}
 }
 
@@ -78,8 +94,10 @@ func clientInput(c *client.Client) {
 			return
 		}
 
-		fmt.Println("RECIVED ["+c.ID+"] :", msg.Data)
+		//fmt.Println("RECIVED ["+c.ID+"] :", msg.Data)
 
+		mutex.Lock()
 		c.Queue.Push(msg)
+		mutex.Unlock()
 	}
 }

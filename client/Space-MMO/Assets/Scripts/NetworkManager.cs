@@ -3,32 +3,40 @@ using System.Collections;
 
 public class NetworkManager : MonoBehaviour {
 
-	Client client;
+	
+	public Client client;
 
 	// Use this for initialization
 	void Start () {
-		StartCoroutine("connection_test");
-	}
+		System.Diagnostics.Debug.WriteLine("test");
+		client = new Client();
+
+		lock (client.sendLock)
+			client.Send(SOCKET_TAG.SET_ID, "Hello world!");
+
+		print(client.queue.Count);
+    }
 	
 	// Update is called once per frame
 	void Update () {
-	
+		ClientUpdate();
+
+		if (Input.GetKeyDown(KeyCode.A)) {
+			client.Send(SOCKET_TAG.SEND_KEY, "A");
+		}
 	}
 
-	IEnumerable connection_test() {
-		client = new Client();
+	void ClientUpdate() {
+		while (client.queue.Count > 0) {
+			Message msg;
+			lock (client.queueLock)
+				msg = client.queue.Dequeue();
 
-		client.Send(SOCKET_TAG.SET_ID, "Hello world!");
-
-		Message msg = client.Recv();
-
-		print(msg.len);
-		print(msg.data);
-		print(msg.tag);
-
-		while (true) {
-			client.Send(SOCKET_TAG.SET_ID, "Added to queue!");
-			yield return new WaitForSeconds(1);
+			switch (msg.Tag) {
+				case SOCKET_TAG.SET_ID:
+					client.ID = int.Parse(msg.Data);
+					break;
+			}
 		}
 	}
 }

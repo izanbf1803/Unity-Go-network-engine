@@ -3,7 +3,6 @@ package client
 import (
 	"bufio"
 	"encoding/binary"
-	"fmt"
 	"io"
 	"net"
 )
@@ -54,8 +53,6 @@ func (client *Client) Send(tag uint32, data []byte) error {
 	packet[3] = byte(tag >> 24)
 
 	packet = append(packet, data...)
-
-	fmt.Println(packet)
 
 	_, err := client.Conn.Write(packet)
 
